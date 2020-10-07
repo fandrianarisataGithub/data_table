@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau{% endblock %}
+
+{% block body %}
+
+   <div class="div_datatable">
+        <table id="tabClient" class="table table-striped table-bordered table-condensed" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Nom client</th>
+                    <th>Date d'arrivée</th>
+                    <th>Date de départ</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+   
+   </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function(){
+           
+            var tabClient = $('#tabClient').DataTable({
+                // ajax 
+                "ajax" : {
+                    "url" : "/admin/select",
+                    "method": 'POST', //usamos el metodo POST
+                    // "data":{opcion:opcion}, //enviamos opcion 4 para que haga un SELECT
+                    "dataSrc":""
+                },
+                "colums" : [
+                    {"data" : "nom"},
+                    {"data" : "date_arrivee"},
+                    {"data" : "date_depart"},
+                    {"defaultContent" : '<div class="text-center"><a href="#" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></a><a href="#" class="btn btn-danger btn-xs"><span class="fa fa-trash-o"></span></a></div>'}
+                ]
+            });
+
+
+        })
+    
+    </script>
+{% endblock %}
